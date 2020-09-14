@@ -1,17 +1,17 @@
 import React from "react";
-import Search from "./components/Search";
+import { Route, Switch } from "react-router-dom";
+import HomePage from "./components/home/HomePage";
+import PageNotFound from "./components/PageNotFound";
+import NowPlaying from "./components/nowplaying/NowPlaying";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header>
-        <h1>Entertainment Database</h1>
-      </header>
-      <main>
-        <Search />
-      </main>
-    </div>
+    <Switch>
+      <Route exact path="/" component={HomePage} />
+      <Route path="/nowplaying" component={NowPlaying} />
+      <Route component={PageNotFound} />
+    </Switch>
   );
-}
+};
 
 export default App;
