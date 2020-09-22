@@ -1,13 +1,23 @@
 import React from "react";
-import Header from "../common/Header";
+import Nav from "../common/Nav";
+import Banner from "../common/Banner";
+import Row from "../common/Row";
+import requests from "../../requests";
 
-const HomePage = () => {
+const Home = () => {
   return (
     <>
-      <Header />
-      <h1>Home Page</h1>
+      <Nav />
+      <Banner />
+      <Row
+        title="NETFLIX ORIGINALS"
+        fetchUrl={requests.fetchNetflixOriginals}
+        isLargeRow={true}
+      />
+      <Row title="Trending Now" fetchUrl={requests.fetchTrending} />
+      <Row title="Top Rated" fetchUrl={requests.fetchTopRated} />
     </>
   );
 };
 
-export default HomePage;
+export default Home;

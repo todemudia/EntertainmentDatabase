@@ -1,4 +1,5 @@
 import React from "react";
+import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./components/pages/HomePage";
 import NotFoundPage from "./components/pages/NotFoundPage";
@@ -6,7 +7,7 @@ import NowPlayingPage from "./components/pages/NowPlayingPage";
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="app">
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/nowplaying" component={NowPlayingPage} />
