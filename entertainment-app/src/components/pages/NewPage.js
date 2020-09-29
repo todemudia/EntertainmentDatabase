@@ -1,14 +1,12 @@
 import React from "react";
 import Banner from "../common/Banner";
-import Nav from "../common/Nav";
 
-const NowPlayingPage = () => {
+const NewPage = () => {
   return (
     <>
-      <Nav />
       <Banner />
     </>
   );
 };
 
-export default NowPlayingPage;
+export default NewPage;

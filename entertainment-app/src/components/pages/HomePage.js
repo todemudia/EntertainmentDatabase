@@ -1,5 +1,4 @@
 import React from "react";
-import Nav from "../common/Nav";
 import Banner from "../common/Banner";
 import Row from "../common/Row";
 import requests from "../../requests";
@@ -7,7 +6,6 @@ import requests from "../../requests";
 const Home = () => {
   return (
     <>
-      <Nav />
       <Banner />
       <Row
         title="NETFLIX ORIGINALS"
