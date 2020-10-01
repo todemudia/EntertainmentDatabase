@@ -5,7 +5,7 @@ import HomePage from "./components/pages/HomePage";
 import NotFoundPage from "./components/pages/NotFoundPage";
 import NewPage from "./components/pages/NewPage";
 import FavouritesPage from "./components/pages/FavouritesPage";
-import SignInPage from "./components/pages/SignIn";
+import Login from "./components/common/Login";
 
 import Nav from "./components/common/Nav";
 
@@ -13,13 +13,30 @@ const App = () => {
   return (
     <Router>
       <div className="app">
-        <Nav />
         <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/new" component={NewPage} />
-          <Route path="/favourites" component={FavouritesPage} />
-          <Route path="/signin" component={SignInPage} />
-          <Route component={NotFoundPage} />
+          <Route path="/login">
+            <Login />
+          </Route>
+
+          <Route exact path="/">
+            <Nav />
+            <HomePage />
+          </Route>
+
+          <Route path="/new">
+            <Nav />
+            <NewPage />
+          </Route>
+
+          <Route path="/favourites">
+            <Nav />
+            <FavouritesPage />
+          </Route>
+
+          <Route>
+            <Nav />
+            <NotFoundPage />
+          </Route>
         </Switch>
       </div>
     </Router>

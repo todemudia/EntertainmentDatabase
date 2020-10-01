@@ -1,22 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import { Link, NavLink } from "react-router-dom";
 import "./Nav.css";
 import EDlogo from "../../assets/EDlogo.jpg";
 
 function Nav() {
-  // const [show, handleShow] = useState(false);
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", () => {
-  //     if (window.scrollY > 100) {
-  //       handleShow(true);
-  //     } else handleShow(false);
-  //   });
-  //   return () => {
-  //     window.removeEventListener("scroll");
-  //   };
-  // }, []);
+  const [user] = useState();
+  const handleAuthentication = () => {
+    if (user) {
+      console.log("user");
+    }
+  };
   return (
     <div className="nav">
       <Link to="/" exact>
@@ -30,6 +24,7 @@ function Nav() {
         />
         <SearchIcon className="nav__searchIcon" />
       </div>
+
       <nav className="nav__links">
         <div className="nav__option">
           <NavLink
@@ -49,9 +44,16 @@ function Nav() {
             Favourites
           </NavLink>
         </div>
-        <Link to="/signin">
-          <div className="nav__signIn"></div>
-          <button className="nav__signInButton">Sign In</button>
+
+        <Link to={!user && "/login"}>
+          <div onClick={handleAuthentication} className="nav__option">
+            <span className="nav__optionLineOne">
+              Hello {!user ? "Guest" : user.email}
+            </span>
+            <span className="nav__optionLineTwo">
+              {user ? "Sign Out" : "Sign In"}
+            </span>
+          </div>
         </Link>
       </nav>
     </div>
