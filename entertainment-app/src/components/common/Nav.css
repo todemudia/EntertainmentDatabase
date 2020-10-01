@@ -71,6 +71,15 @@
   color: white;
 }
 
+.nav__optionLineOne {
+  font-size: 10px;
+}
+
+.nav__optionLineTwo {
+  font-size: 13px;
+  font-weight: 800;
+}
+
 .nav__signInButton {
   margin-left: 1rem;
   padding: 5px;
