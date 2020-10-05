@@ -1,30 +1,42 @@
-const mongoose = require('mongoose');
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config(); 
+import mongoose from 'mongoose';
+import express from 'express';
+import morgan from 'morgan';
+import cors from 'cors';
+import path from 'path';
 
-/***********  Initial Setup *************/
-const port = process.env.PORT || 3001;
+import config from './config';
+
+
+/**** Routes ****/
 
 /**** Middleware Config ****/
 const app = express();
 app.use(cors());
+app.use(morgan('dev'));
 app.use(express.json())
 
-/********** Mongoose Setup  ************/
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { 
-    useNewUrlParser: true, 
-    useCreateIndex: true, 
-    useUnifiedTopology: true 
-});
+/************** DB Config *****************/
+const {MONGO_URI, MONGO_DB_NAME } = config;
+const db = `${MONGO_URI}/${MONGO_DB_NAME}`;
+
 /*********** Connect to DB  **************/
-const connection = mongoose.connection;
-connection.once('open', () => {
-    console.log("MongoDB database connection established succesfully")
-})
+mongoose
+  .connect(db, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+  }) // Adding new mongo url parser
+  .then(() => console.log('MongoDB Connected...'))
+  .catch(err => console.log(err));
 
+/*** Serve Static assets if in prodction ***/
+if (process.env.NODE_ENV === 'production'){
+    //set static folder
+    app.use(express.static('client/build'));
 
-app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
-})
+    app.get('*', (req,res) =>{
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    });
+}
+
+export default app;
