@@ -1,0 +1,4 @@
+{
+    "mongoURI": "ATLAS_URI=mongodb+srv://nova:Leg1wqbRXf04jDm7@cluster0.6udgs.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    "jwtSecret": "nova_data_secretkey"
+  }
