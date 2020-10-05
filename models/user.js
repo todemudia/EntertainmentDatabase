@@ -1,11 +1,8 @@
 import { Schema,model } from 'mongoose';
-
+import config from '../config';
+import jwt from 'jsonwebtoken';
 const UserSchema = new Schema ({
     name: {
-        type:String,
-        required: true
-    },
-    lastname: {
         type:String,
         required: true
     },
@@ -24,6 +21,6 @@ const UserSchema = new Schema ({
     },
 })
 
-const User = model('User', userSchema);
+const User = model('User', UserSchema);
 
 export default User;

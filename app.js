@@ -6,8 +6,10 @@ import path from 'path';
 
 import config from './config';
 
-
 /**** Routes ****/
+import favourites from './routes/favourites';
+import users from './routes/users';
+import auth from './routes/auth';
 
 /**** Middleware Config ****/
 const app = express();
@@ -28,6 +30,12 @@ mongoose
   }) // Adding new mongo url parser
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
+
+
+/************* Use Routes ****************/
+app.use('/users', users);
+app.use('/favourites', favourites);
+app.use('/auth', auth);
 
 /*** Serve Static assets if in prodction ***/
 if (process.env.NODE_ENV === 'production'){
