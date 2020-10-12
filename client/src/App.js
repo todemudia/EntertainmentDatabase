@@ -5,6 +5,8 @@ import HomePage from "./components/pages/HomePage";
 import NotFoundPage from "./components/pages/NotFoundPage";
 import NewPage from "./components/pages/NewPage";
 import FavouritesPage from "./components/pages/FavouritesPage";
+import TVPage from "./components/pages/TVPage";
+import MoviePage from "./components/pages/MoviePage";
 import Login from "./components/common/Login";
 
 import Nav from "./components/common/Nav";
@@ -31,6 +33,16 @@ const App = () => {
           <Route path="/favourites">
             <Nav />
             <FavouritesPage />
+          </Route>
+
+          <Route path="/tv">
+            <Nav />
+            <TVPage />
+          </Route>
+
+          <Route path="/movie">
+            <Nav />
+            <MoviePage />
           </Route>
 
           <Route>
