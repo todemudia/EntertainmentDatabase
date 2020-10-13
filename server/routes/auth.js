@@ -26,7 +26,7 @@ router.post("/login", async (req, res) => {
   try {
     // Check for existing user
     const user = await User.findOne({ email });
-    if (!user) throw Error("User does not exist");
+    if (!user) throw Error("Account does not exist");
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) throw Error("Invalid credentials");
@@ -65,7 +65,7 @@ router.post("/register", async (req, res) => {
 
   try {
     const user = await User.findOne({ email });
-    if (user) throw Error("User already exists");
+    if (user) throw Error("Email taken");
 
     const salt = await bcrypt.genSalt(10);
     if (!salt) throw Error("Something went wrong with bcrypt");
@@ -108,7 +108,7 @@ router.post("/register", async (req, res) => {
 router.get("/user", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
-    if (!user) throw Error("User does not exist");
+    if (!user) throw Error("No Account exists with that Email");
     res.json(user);
   } catch (e) {
     res.status(400).json({ msg: e.message });
