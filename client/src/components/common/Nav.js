@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
+import Search from "./Search";
 import { Link, NavLink } from "react-router-dom";
 import "./Nav.css";
 import EDlogo from "../../assets/EDlogo.jpg";
@@ -26,17 +27,10 @@ function Nav() {
 
   return (
     <div className="nav">
-      <Link to="/" exact>
+      <Link to="/" exact="true">
         <img className="nav__logo" src={EDlogo} alt="Company logo" />
       </Link>
-      <div className="nav__search">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="nav__searchInput"
-        />
-        <SearchIcon className="nav__searchIcon" />
-      </div>
+      <Search />
 
       <nav className="nav__links">
         <div className="nav__option">
