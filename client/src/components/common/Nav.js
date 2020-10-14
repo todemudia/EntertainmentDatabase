@@ -1,16 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import SearchIcon from "@material-ui/icons/Search";
+import Search from "./Search";
 import { Link, NavLink } from "react-router-dom";
 import "./Nav.css";
 import EDlogo from "../../assets/EDlogo.jpg";
-import Search from "./Search";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../redux/actions/authActions";
 
 function Nav() {
-  const [user] = useState();
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const userInfo = useSelector((state) => state.auth.user);
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setUser(userInfo);
+    }
+  }, [userInfo]);
+
   const handleAuthentication = () => {
     if (user) {
-      console.log("user");
+      dispatch(logout());
     }
   };
+
   return (
     <div className="nav">
       <Link to="/" exact="true">
@@ -38,13 +52,13 @@ function Nav() {
           </NavLink>
         </div>
 
-        <Link to={!user && "/login"}>
+        <Link to={!isAuthenticated && "/login"}>
           <div onClick={handleAuthentication} className="nav__option">
             <span className="nav__optionLineOne">
-              Hello {!user ? "Guest" : user.email}
+              Hello {!isAuthenticated ? "Guest" : userInfo.name}
             </span>
             <span className="nav__optionLineTwo">
-              {user ? "Sign Out" : "Sign In"}
+              {isAuthenticated ? "Sign Out" : "Sign In"}
             </span>
           </div>
         </Link>

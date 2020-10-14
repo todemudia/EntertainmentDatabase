@@ -1,26 +1,34 @@
-import {Schema, model } from 'mongoose';
-
+import { Schema, model } from "mongoose";
 
 //Create Schema
-const FavouriteSchema = new Schema({
+const FavouriteSchema = new Schema(
+  {
     userFrom: {
-        type: Schema.Types.ObjectId,
-        ref:'User'
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
-    movieId : {
-        type:String
+    movieId: {
+      type: String,
     },
     movieTitle: {
-        type:String
+      type: String,
     },
     movieImage: {
-        type: String
+      type: String,
     },
     movieRunTime: {
-        type: String 
-    }
-})
+      type: String,
+    },
+  },
+  {
+    writeConcern: {
+      w: "majority",
+      j: true,
+      wtimeout: 1000,
+    },
+  }
+);
 
-const Favourite = model('Favourite', FavouriteSchema);
+const Favourite = model("Favourite", FavouriteSchema);
 
 export default Favourite;

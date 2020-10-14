@@ -1,26 +1,34 @@
-import { Schema,model } from 'mongoose';
-import config from '../config';
-import jwt from 'jsonwebtoken';
-const UserSchema = new Schema ({
+import { Schema, model } from "mongoose";
+
+const UserSchema = new Schema(
+  {
     name: {
-        type:String,
-        required: true
+      type: String,
+      required: true,
     },
     email: {
-        type:String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     password: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     register_date: {
-        type: Date,
-        default: Date.now
+      type: Date,
+      default: Date.now,
     },
-})
+  },
+  {
+    writeConcern: {
+      w: "majority",
+      j: true,
+      wtimeout: 1000,
+    },
+  }
+);
 
-const User = model('User', UserSchema);
+const User = model("User", UserSchema);
 
 export default User;

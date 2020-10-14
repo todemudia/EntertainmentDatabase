@@ -69,3 +69,8 @@
   margin-top: 10px;
   border-color: darkgray;
 }
+
+.login__error_msg {
+  color: #d8000c;
+  text-align: center;
+}

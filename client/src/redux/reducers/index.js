@@ -1,8 +1,12 @@
-import { combineReducers } from 'redux';
-//import reducers
+import { combineReducers } from "redux";
+import favouriteReducer from "./favouriteReducer";
+import errorReducer from "./errorReducer";
+import authReducer from "./authReducer";
 
 const rootReducers = combineReducers({
-    //reducers to be combined go in here
+  favourite: favouriteReducer,
+  error: errorReducer,
+  auth: authReducer,
 });
 
 export default rootReducers;
