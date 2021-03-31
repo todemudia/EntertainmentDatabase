@@ -11,7 +11,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "i:client": "cd client && npm install",
     "i:server": "cd server && npm install",
-    "postinstall": "npm install && npm run i:client && npm run i:server"
+    "postinstall": "npm run i:client && npm run i:server"
   },
   "repository": {
     "type": "git",
