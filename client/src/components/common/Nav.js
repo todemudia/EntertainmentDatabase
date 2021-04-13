@@ -1,13 +1,77 @@
 import React, { useEffect, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import Search from "./Search";
 import { Link, NavLink } from "react-router-dom";
-import "./Nav.css";
 import EDlogo from "../../assets/EDlogo.jpg";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../redux/actions/authActions";
 
+const useStyles = makeStyles((theme) => ({
+  nav: {
+    height: "70px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundVolor: "#000",
+    position: "sticky",
+    top: "0",
+    zIndex: "100",
+  },
+
+  navLogo: {
+    height: "50px",
+    borderRadius: "10px",
+    width: "100px",
+    objectFit: "contain",
+    margin: "0 20px",
+  },
+
+  navLinks: {
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    marginRight: "2rem",
+  },
+
+  navLink: {
+    textDecoration: "none",
+    color: "#eee",
+    "&:hover": {
+      color: "#d8412d",
+    },
+    fontSize: "1rem",
+  },
+
+  navOption: {
+    display: "flex",
+    flexDirection: "column",
+    marginLeft: "10px",
+    marginRight: "10px",
+    color: "white",
+  },
+
+  navOptionLineOne: {
+    fontSize: "10px",
+  },
+
+  navOptionLineTwo: {
+    fontSize: "13px",
+    fontWeight: "800",
+  },
+
+  navSignInButton: {
+    marginLeft: "1rem",
+    padding: "5px",
+    "&:hover": {
+      cursor: "pointer",
+      color: "#d8412d",
+    },
+  },
+}));
+
 function Nav() {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const userInfo = useSelector((state) => state.auth.user);
@@ -26,26 +90,26 @@ function Nav() {
   };
 
   return (
-    <div className="nav">
+    <div className={classes.nav}>
       <Link to="/" exact="true">
-        <img className="nav__logo" src={EDlogo} alt="Company logo" />
+        <img className={classes.navLogo} src={EDlogo} alt="Company logo" />
       </Link>
       <Search />
 
-      <nav className="nav__links">
-        <div className="nav__option">
+      <nav className={classes.navLinks}>
+        <div className={classes.navOption}>
           <NavLink
-            className="nav__link"
-            activeStyle={{ color: " #d8412d" }}
+            className={classes.navLink}
+            activeStyle={{ color: "#d8412d" }}
             to="/new"
           >
             New
           </NavLink>
         </div>
-        <div className="nav__option">
+        <div className="navOption">
           <NavLink
-            className="nav__link"
-            activeStyle={{ color: " #d8412d" }}
+            className={classes.navLink}
+            activeStyle={{ color: "#d8412d" }}
             to="/favourites"
           >
             Favourites
@@ -53,11 +117,11 @@ function Nav() {
         </div>
 
         <Link to={!isAuthenticated && "/login"}>
-          <div onClick={handleAuthentication} className="nav__option">
-            <span className="nav__optionLineOne">
+          <div onClick={handleAuthentication} className={classes.navOption}>
+            <span className={classes.navOptionLineOne}>
               Hello {!isAuthenticated ? "Guest" : userInfo.name}
             </span>
-            <span className="nav__optionLineTwo">
+            <span className={classes.navOptionLineTwo}>
               {isAuthenticated ? "Sign Out" : "Sign In"}
             </span>
           </div>

@@ -1,19 +1,96 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
-import "./Login.css";
 import EDlogo from "../../assets/EDlogo.jpg";
 import { login } from "../../redux/actions/authActions";
 import { clearErrors } from "../../redux/actions/errorActions";
 
+const useStyles = makeStyles((theme) => ({
+  login: {
+    backgroundColor: "rgb(19, 14, 14)",
+    height: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+
+  loginLogo: {
+    marginTop: "20px",
+    marginBottom: "20px",
+    objectFit: "contain",
+    width: "100px",
+    marginRight: "auto",
+    marginLeft: "auto",
+    borderRadius: "5px",
+  },
+
+  loginContainer: {
+    width: "300px",
+    height: "fit-content",
+    display: "flex",
+    flexDirection: "column",
+    borderRadius: "5px",
+    border: "1px solid lightgray",
+    padding: "20px",
+    color: "white",
+    "& > h1": {
+      fontWeight: "500",
+      marginBottom: "20px",
+    },
+  },
+
+  // .login__container > form > h5 {
+  //   margin-bottom: 5px;
+  // }
+
+  // .login__container > form > input {
+  //   height: 30px;
+  //   margin-bottom: 10px;
+  //   background-color: white;
+  //   width: 98%;
+  // }
+
+  // .login__container > p {
+  //   margin-top: 15px;
+  //   font-size: 12px;
+  // }
+
+  loginSignInButton: {
+    background: "#d8412d",
+    borderRadius: "2px",
+    border: "1px solid",
+    width: "100%",
+    height: "30px",
+    marginTop: "10px",
+    borderColor: "#a3554d #853b31 #d8412d",
+    fontWeight: "600",
+    fontSize: "15px",
+    color: "rgb(255, 249, 249)",
+  },
+
+  loginRegisterButton: {
+    borderRadius: "2px",
+    border: "1px solid",
+    width: "100%",
+    height: "30px",
+    marginTop: "10px",
+    borderColor: "darkgray",
+  },
+
+  loginErrorMsg: {
+    color: "#d8000c",
+    textAlign: "center",
+  },
+}));
+
 const Login = () => {
+  const classes = useStyles();
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(null);
-
-  const history = useHistory();
-  const dispatch = useDispatch();
-
   const { isAuthenticated } = useSelector((state) => state.auth);
   const { error, msg } = useSelector((state) => state.error.msg);
   const id = useSelector((state) => state.error.id);
@@ -42,11 +119,11 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
+    <div className={classes.login}>
       <Link to="/">
-        <img className="login__logo" src={EDlogo} alt="Company logo" />
+        <img className={classes.loginLogo} src={EDlogo} alt="Company logo" />
       </Link>
-      <div className="login__container">
+      <div className={classes.loginContainer}>
         <h1>Sign-in</h1>
 
         <form onSubmit={onSubmit}>
@@ -68,17 +145,17 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button type="submit" className="login__signInButton">
+          <button type="submit" className={classes.loginSignInButton}>
             Sign In
           </button>
         </form>
-        <p class={"login__error_msg"}>{message}</p>
+        <p className={classes.loginErrorMsg}>{message}</p>
         <p>
           By signing-in you agree to the ED SITE Conditions of Use & Sale.
           Please see our Privacy Notice, our Cookies Notice and our
           Interest-Based Ads Notice.
         </p>
-        <button onClick={register} className="login__registerButton">
+        <button onClick={register} className={classes.loginRegisterButton}>
           Create your ED Account
         </button>
       </div>

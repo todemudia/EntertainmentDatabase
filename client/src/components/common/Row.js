@@ -6,13 +6,12 @@ import "./Row.css";
 const base_url = "https://image.tmdb.org/t/p/original/";
 
 function Row({ title, fetchUrl }) {
-  const [media, setMedia] = useState([]);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       const request = await axios.get(fetchUrl);
-      console.log(fetchUrl);
-      setMedia(request.data.results);
+      setMovies(request.data.results);
 
       return request;
     }
@@ -23,16 +22,17 @@ function Row({ title, fetchUrl }) {
     <div className="row">
       <h2>{title}</h2>
       <div className="row__posters">
-        {media.map((media) => (
+        {movies.map((movie) => (
           <Link
-            key={media.id}
-            to={media.media_type ? `/${media.media_type}` : `/movie`}
+            to={{ pathname: "/movie", key: movie.id, state: movie }}
+            // to={movie.media_type ? `/${movie.media_type}` : `/movie`}
+            // state={movie.id}
           >
             <img
-              key={media.id}
+              key={movie.id}
               className="row__poster"
-              src={`${base_url}${media.poster_path}`}
-              alt={media.name}
+              src={`${base_url}${movie.poster_path}`}
+              alt={movie.name}
             />
           </Link>
         ))}
