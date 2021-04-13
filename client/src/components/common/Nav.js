@@ -13,12 +13,11 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundVolor: "#000",
+    backgroundColor: "#000",
     position: "sticky",
     top: "0",
     zIndex: "100",
   },
-
   navLogo: {
     height: "50px",
     borderRadius: "10px",
@@ -26,14 +25,12 @@ const useStyles = makeStyles((theme) => ({
     objectFit: "contain",
     margin: "0 20px",
   },
-
   navLinks: {
     display: "flex",
     justifyContent: "space-evenly",
     alignItems: "center",
     marginRight: "2rem",
   },
-
   navLink: {
     textDecoration: "none",
     color: "#eee",
@@ -42,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
     },
     fontSize: "1rem",
   },
-
   navOption: {
     display: "flex",
     flexDirection: "column",
@@ -50,16 +46,13 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "10px",
     color: "white",
   },
-
   navOptionLineOne: {
     fontSize: "10px",
   },
-
   navOptionLineTwo: {
     fontSize: "13px",
     fontWeight: "800",
   },
-
   navSignInButton: {
     marginLeft: "1rem",
     padding: "5px",

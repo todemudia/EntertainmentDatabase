@@ -38,25 +38,22 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: "500",
       marginBottom: "20px",
     },
+    "& > form > h5": {
+      marginBottom: "5px",
+    },
+    "& > form > input": {
+      height: "30px",
+      marginBottom: "10px",
+      backgroundColor: "white",
+      width: "98%",
+    },
+    "& > p": {
+      marginTop: "15px",
+      fontSize: "12px",
+    },
   },
 
-  // .login__container > form > h5 {
-  //   margin-bottom: 5px;
-  // }
-
-  // .login__container > form > input {
-  //   height: 30px;
-  //   margin-bottom: 10px;
-  //   background-color: white;
-  //   width: 98%;
-  // }
-
-  // .login__container > p {
-  //   margin-top: 15px;
-  //   font-size: 12px;
-  // }
-
-  loginSignInButton: {
+  loginButton: {
     background: "#d8412d",
     borderRadius: "2px",
     border: "1px solid",
@@ -69,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
     color: "rgb(255, 249, 249)",
   },
 
-  loginRegisterButton: {
+  registerButton: {
     borderRadius: "2px",
     border: "1px solid",
     width: "100%",
@@ -78,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
     borderColor: "darkgray",
   },
 
-  loginErrorMsg: {
+  errorMsg: {
     color: "#d8000c",
     textAlign: "center",
   },
@@ -145,17 +142,17 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button type="submit" className={classes.loginSignInButton}>
+          <button type="submit" className={classes.loginButton}>
             Sign In
           </button>
         </form>
-        <p className={classes.loginErrorMsg}>{message}</p>
+        <p className={classes.errorMsg}>{message}</p>
         <p>
           By signing-in you agree to the ED SITE Conditions of Use & Sale.
           Please see our Privacy Notice, our Cookies Notice and our
           Interest-Based Ads Notice.
         </p>
-        <button onClick={register} className={classes.loginRegisterButton}>
+        <button onClick={register} className={classes.registerButton}>
           Create your ED Account
         </button>
       </div>
