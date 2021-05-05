@@ -16,23 +16,8 @@ then start the application in the root directory
  npm start
 ```
 
-## Registration Page
-![Alt text](client/src/assets/registration.png?raw=true "Title")
-
-
-
-
-
-## Login Page
-![Alt text](client/src/assets/login.png?raw=true "Title")
-
-
-
-
-
 ## Main Page
-
-![Alt text](client/src/assets/mainPage.png?raw=true "Title")
+![Alt text](client/src/assets/registration.png?raw=true "Title")
 
 
 
