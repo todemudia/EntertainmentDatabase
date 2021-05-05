@@ -25,6 +25,8 @@ const db = `${MONGO_URI}/${MONGO_DB_NAME}`;
 mongoose
   .connect(db, {
     useNewUrlParser: true,
+    poolSize: 50,
+    wtimeout: 2500,
     useCreateIndex: true,
     useUnifiedTopology: true,
   }) // Adding new mongo url parser

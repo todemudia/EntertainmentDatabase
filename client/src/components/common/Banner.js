@@ -9,8 +9,6 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
     objectFit: "contain",
     height: "448px",
-    size: "cover",
-    position: "center center",
   },
   bannerContents: {
     marginLeft: "30px",
