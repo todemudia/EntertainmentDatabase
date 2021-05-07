@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Banner from "../common/Banner";
 import Row from "../common/Row";
 import requests from "../../requests";
+import { useDispatch, useSelector } from "react-redux";
+import { getMedia } from "../../redux/actions/mediaActions";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const media = useSelector((state) => state.media);
+
+  useEffect(() => {
+    dispatch(getMedia());
+    console.log(media);
+  }, []);
+
   return (
     <>
       <Banner />

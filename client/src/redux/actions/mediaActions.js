@@ -1,27 +1,23 @@
 import axios from "axios";
 import requests from "../../requests";
 import { returnErrors } from "./errorActions";
-import { GET_MOVIES, GET_MOVIES_ERROR, MOVIES_LOADED } from "./types";
+import { GET_MEDIA, GET_MEDIA_ERROR, GET_MEDIA_SUCCESS } from "./types";
 
 // check token and load user
 
-export const getMovies = (fetchUrl) => (dispatch) => {
+export const getMedia = () => async (dispatch) => {
   // User loading
-  dispatch({ type: GET_MOVIES });
-
   axios
-    .get(`${fetchUrl}`)
+    .get(`${requests.base_url}${requests.fetchTrendingTVShows}`)
     .then((res) =>
       dispatch({
-        
-        type: MOVIES_LOADED,
+        type: GET_MEDIA,
         payload: res.data,
       })
     )
     .catch((err) => {
       dispatch(returnErrors(err.response.data, err.response.status));
-      dispatch({
-        type: GET_MOVIES_ERROR,
-      });
+      dispatch({ type: GET_MEDIA_ERROR });
+      console.log(err);
     });
 };

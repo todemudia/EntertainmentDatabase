@@ -1,45 +1,51 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
-import { IconButton } from "@material-ui/core";
+import { IconButton, InputBase, Paper } from "@material-ui/core";
+import axios from "../../api";
 
 const useStyles = makeStyles((theme) => ({
-  navSearch: {
+  root: {
+    padding: "2px 4px",
     display: "flex",
-    flex: "0.5",
     alignItems: "center",
-    borderRadius: "24px",
+    width: 500,
+    height: "60%",
   },
-  navSearchInput: {
-    height: "12px",
-    padding: "10px",
-    border: "none",
-    width: "100%",
+  input: {
+    marginLeft: theme.spacing(1),
+    flex: 1,
   },
-  navSearchIcon: {
-    padding: "5px",
-    height: "22px",
-    backgroundColor: "#d8412d",
-    cursor: "pointer",
+  iconButton: {
+    padding: 10,
   },
-  searchButton: {
-    margin: "0px",
+  divider: {
+    height: 28,
+    margin: 4,
   },
 }));
 
 function Search() {
   const classes = useStyles();
 
+  useEffect(() => {});
+
   return (
     <>
-      <div className={classes.navSearch}>
-        <input
-          type="text"
-          placeholder="Search..."
-          className={classes.navSearchInput}
+      <Paper component="form" className={classes.root}>
+        <InputBase
+          className={classes.input}
+          placeholder="Search"
+          inputProps={{ "aria-label": "search" }}
         />
-        <SearchIcon className={classes.navSearchIcon} />
-      </div>
+        <IconButton
+          type="submit"
+          className={classes.iconButton}
+          aria-label="search"
+        >
+          <SearchIcon />
+        </IconButton>
+      </Paper>
     </>
   );
 }

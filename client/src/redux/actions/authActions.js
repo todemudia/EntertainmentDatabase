@@ -13,10 +13,8 @@ import {
 
 // check token and load user
 
-export const loadUser = () => (dispatch, getState) => {
-  // User loading
+export const loadUser = () => async (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
-
   axios
     .get("http://localhost:5001/auth/user", tokenConfig(getState))
     .then((res) =>
@@ -34,15 +32,12 @@ export const loadUser = () => (dispatch, getState) => {
 };
 
 /***********Register User *************/
-export const register = (name, email, password) => (dispatch) => {
-  // Headers
+export const register = (name, email, password) => async (dispatch) => {
   const config = {
     headers: {
       Content_Type: "application/json",
     },
   };
-
-  //Request Body
   axios
     .post(
       "http://localhost:5001/auth/register/",
@@ -65,15 +60,12 @@ export const register = (name, email, password) => (dispatch) => {
     });
 };
 
-export const login = (email, password) => (dispatch) => {
-  // Headers
+export const login = (email, password) => async (dispatch) => {
   const config = {
     headers: {
       Content_Type: "application/json",
     },
   };
-
-  //Request Body
   axios
     .post("http://localhost:5001/auth/login/", { email, password }, config)
     .then((res) =>
@@ -92,28 +84,21 @@ export const login = (email, password) => (dispatch) => {
     });
 };
 
-//log user out
-export const logout = () => {
+export const logout = async () => {
   return {
     type: LOGOUT_SUCCESS,
   };
 };
 
-// Setup config/headers and token
 export const tokenConfig = (getState) => {
-  //get token from localStorage
   const token = getState().auth.token;
-
-  //headers
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
-
   if (token) {
     config.headers["x-auth-token"] = token;
   }
-
   return config;
 };

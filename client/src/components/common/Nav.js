@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-evenly",
     alignItems: "center",
-    marginRight: "2rem",
+    marginRight: "3rem",
   },
   navLink: {
     textDecoration: "none",
@@ -37,13 +37,13 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       color: "#d8412d",
     },
-    fontSize: "1rem",
+    fontSize: "1.1rem",
   },
   navOption: {
     display: "flex",
     flexDirection: "column",
-    marginLeft: "10px",
-    marginRight: "10px",
+    marginLeft: "20px",
+    marginRight: "20px",
     color: "white",
   },
   navOptionLineOne: {
