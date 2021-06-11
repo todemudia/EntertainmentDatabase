@@ -23,13 +23,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Icon({ src, alt }) {
+const Icon = ({ src, alt }) => {
   const classes = useStyles();
   return (
     <>
       <img className={classes.providerIcon} src={src} alt={alt} />
     </>
   );
-}
+};
 
 export default Icon;

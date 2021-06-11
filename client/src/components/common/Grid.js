@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import axios from '../../api';
-import requests from '../../requests';
 
 const base_url = 'https://image.tmdb.org/t/p/original/';
 
@@ -13,18 +12,17 @@ const useStyles = makeStyles((theme) => ({
   },
   rowPosters: {
     display: 'flex',
-    overflowY: 'hidden',
-    overflowX: 'scroll',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
     padding: '20px',
-    '&::-webkit-scrollbar': {
-      display: 'none',
-    },
   },
   rowPoster: {
     objectFit: 'contain',
     /* width: 100%; */
     maxHeight: '350px',
     marginRight: '20px',
+    marginBottom: '20px',
     transition: 'transform 450ms',
     '&:hover': {
       transform: 'scale(1.09)',
@@ -33,36 +31,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Row({ title, fetchUrl }) {
+const Grid = () => {
   const classes = useStyles();
+  const location = useLocation();
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
-      const request = await axios.get(fetchUrl);
-      setMovies(request.data.results);
-      return request;
-    }
-    fetchData();
-  }, [fetchUrl]);
+    setMovies(location.state.movies);
+  }, [location]);
 
   return (
     <div className={classes.row}>
-      <h2>{title}</h2>
       <div className={classes.rowPosters}>
-        {movies.map((movie) => (
-          <Link to={{ pathname: '/movie', key: movie.id, state: movie }}>
-            <img
-              key={movie.id}
-              className={classes.rowPoster}
-              src={`${base_url}${movie.poster_path}`}
-              alt={movie.name}
-            />
-          </Link>
-        ))}
+        {movies ? (
+          movies.map((movie) => (
+            <Link to={{ pathname: '/movie', key: movie.id, state: movie }}>
+              {movie.poster_path ? (
+                <img
+                  key={movie.id}
+                  className={classes.rowPoster}
+                  src={`${base_url}${movie.poster_path}`}
+                  alt={movie.name}
+                />
+              ) : (
+                ''
+              )}
+            </Link>
+          ))
+        ) : (
+          <div>No Movies Found</div>
+        )}
       </div>
     </div>
   );
-}
+};
 
-export default Row;
+export default Grid;

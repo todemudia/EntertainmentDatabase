@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import SearchIcon from "@material-ui/icons/Search";
 import Search from "./Search";
 import { Link, NavLink } from "react-router-dom";
 import EDlogo from "../../assets/EDlogo.jpg";
@@ -10,9 +9,9 @@ import { logout } from "../../redux/actions/authActions";
 const useStyles = makeStyles((theme) => ({
   nav: {
     height: "70px",
-    display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    display: "grid",
+    gridTemplateColumns: "20% 60% 20%",
     backgroundColor: "#000",
     position: "sticky",
     top: "0",
@@ -63,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Nav() {
+const Nav = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -87,18 +86,10 @@ function Nav() {
       <Link to="/" exact="true">
         <img className={classes.navLogo} src={EDlogo} alt="Company logo" />
       </Link>
-      <Search />
+
+      <Search className={classes.navSearch} />
 
       <nav className={classes.navLinks}>
-        <div className={classes.navOption}>
-          <NavLink
-            className={classes.navLink}
-            activeStyle={{ color: "#d8412d" }}
-            to="/new"
-          >
-            New
-          </NavLink>
-        </div>
         <div className="navOption">
           <NavLink
             className={classes.navLink}
@@ -108,7 +99,6 @@ function Nav() {
             Favourites
           </NavLink>
         </div>
-
         <Link to={!isAuthenticated && "/login"}>
           <div onClick={handleAuthentication} className={classes.navOption}>
             <span className={classes.navOptionLineOne}>
@@ -122,6 +112,6 @@ function Nav() {
       </nav>
     </div>
   );
-}
+};
 
 export default Nav;
